@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main  # Adjust this if you are using a different branch
+  git config --global user.email "nahmastaa@outlook.fr"
+  git config --global user.name "mqwele"
 
 jobs:
   sync:
