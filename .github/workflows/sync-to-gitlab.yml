@@ -15,9 +15,14 @@ jobs:
       with:
         fetch-depth: 0  # This ensures a full clone is performed
 
+    - name: Set up Git configuration
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
     - name: Sync to GitLab
       env:
         GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
       run: |
         git remote add gitlab https://oauth2:${GITLAB_TOKEN}@gitlab.com/mqwele/consul-hashicorp.git
-        git push --mirror gitlab
+        git push gitlab main:main  # Push to the main branch without forcing
