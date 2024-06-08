@@ -24,7 +24,7 @@ jobs:
           GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
         run: |
           git remote add gitlab https://oauth2:${{ secrets.GITLAB_TOKEN }}@gitlab.com/mqwele/consul-hashicorp.git
-          git pull gitlab main
+          git pull -r gitlab main
 
       - name: Push to GitLab
         env:
