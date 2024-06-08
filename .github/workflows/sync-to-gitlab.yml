@@ -20,9 +20,17 @@ jobs:
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-    - name: Sync to GitLab
+    - name: Fetch changes from GitLab
+      run: |
+        git remote add gitlab https://oauth2:${GITLAB_TOKEN}@gitlab.com/mqwele/consul-hashicorp.git
+        git fetch gitlab
+
+    - name: Pull changes from GitLab
+      run: |
+        git pull gitlab main
+
+    - name: Push changes to GitLab
       env:
         GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
       run: |
-        git remote add gitlab https://oauth2:${GITLAB_TOKEN}@gitlab.com/mqwele/consul-hashicorp.git
-        git push gitlab main:main  # Push to the main branch without forcing
+        git push gitlab main:main
