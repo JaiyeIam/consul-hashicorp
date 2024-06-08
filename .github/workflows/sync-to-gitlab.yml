@@ -19,16 +19,11 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Pull from GitLab and Reconcile Differences
+      - name: Pull from GitLab and Force-Push Changes
         env:
           GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
         run: |
           git remote add gitlab https://oauth2:${{ secrets.GITLAB_TOKEN }}@gitlab.com/mqwele/consul-hashicorp.git
           git fetch gitlab
-          git pull --no-rebase  # Choose the appropriate option here based on your preference
-
-      - name: Push to GitLab
-        env:
-          GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
-        run: |
-          git push gitlab main
+          git reset --hard gitlab/main
+          git push gitlab main --force
