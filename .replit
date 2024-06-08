@@ -1,0 +1,6 @@
+run = "git rm"
+[nix]
+channel = "stable-23_11"
+
+[deployment]
+run = ["sh", "-c", "git rm"]
