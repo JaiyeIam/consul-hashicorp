@@ -10,20 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4  # Automatically use the latest version
+        uses: actions/checkout@v2  # Use the latest version of checkout action
         with:
           fetch-depth: 0  # Perform a full clone
 
-      - name: Configure Git
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-
-      - name: Pull from GitLab and Force-Push Changes
+      - name: Push to GitLab
         env:
           GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
         run: |
           git remote add gitlab https://oauth2:${{ secrets.GITLAB_TOKEN }}@gitlab.com/mqwele/consul-hashicorp.git
-          git fetch gitlab
-          git reset --hard gitlab/main
-          git push gitlab main --force
+          git push gitlab main
