@@ -25,7 +25,7 @@ jobs:
         run: |
           git remote add gitlab https://oauth2:${{ secrets.GITLAB_TOKEN }}@gitlab.com/mqwele/consul-hashicorp.git
           git fetch gitlab
-          git merge -X ours gitlab/main || echo "Merge conflicts resolved using ours strategy"
+          git pull gitlab main
 
       - name: Push to GitLab
         env:
