@@ -16,4 +16,4 @@ terraform destroy
 # show resources and components from current state
 terraform state list
 
-# this is a test
+# this is a test to check gitlab repo
