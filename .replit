@@ -1,4 +1,5 @@
 run = "git rm"
+entrypoint = "README.md"
 [nix]
 channel = "stable-23_11"
 
